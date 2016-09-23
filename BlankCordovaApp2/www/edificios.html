@@ -1,10 +1,26 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+    <meta charset="utf-8">
+    <title>jQuery Ajax</title>
+    <script>
+function testAjax() {
+$.ajax({
+    url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAx',
+type: 'GET',
+dataType:"jsonp",
+success: function(data) {
+$('body').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+},
+error: function(jqXHR, textStatus, error) {
+alert( "error: " + jqXHR.responseText);
+}
+});
+}
+    </script>
 </head>
 <body>
-    <div>Aquí se debe incluir el contenido.</div>
+    <button onclick="testAjax();">click para probar</button>
 </body>
 </html>
