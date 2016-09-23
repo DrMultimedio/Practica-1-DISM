@@ -7,11 +7,18 @@
     <script>
 function testAjax() {
 $.ajax({
-    url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAx',
+    url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAxEerHUUvT/datasets/11/data',
 type: 'GET',
 dataType:"jsonp",
 success: function(data) {
-$('body').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+    //$('body').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+    var edificios = data;
+    $(edificios).each(function(index,data){
+        $('body').append(edificios.toString);
+})
+
+
+    $('body').append("BIBA ");
 },
 error: function(jqXHR, textStatus, error) {
 alert( "error: " + jqXHR.responseText);
