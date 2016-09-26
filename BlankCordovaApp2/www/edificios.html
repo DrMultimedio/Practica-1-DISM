@@ -13,12 +13,13 @@ dataType:"jsonp",
 success: function(data) {
     //$('body').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
     var edificios = data;
-    $(edificios).each(function(index,data){
-        $('body').append(edificios.toString);
+    $(edificios).each(function (index, datos) {
+        var pos = datos.bbox.split(",");
+        $('body').append("<div><h5> Nombre:" + datos.nombre + "</h4>" + "<ul><li>Latitud:" + pos[0] + "</li><li>Longitud " + pos[1] + "</li><li>Plantas " + datos.plantas + "</ul></div>");
+
 })
 
 
-    $('body').append("BIBA ");
 },
 error: function(jqXHR, textStatus, error) {
 alert( "error: " + jqXHR.responseText);
