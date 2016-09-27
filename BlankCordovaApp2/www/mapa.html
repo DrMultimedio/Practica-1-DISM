@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <title>Simple icons</title>
@@ -29,11 +30,28 @@ function initMap() {
     center: { lat: 38.385023, lng: -0.513040 }
   });
 
-  var image = 'images/coso.png';
-  var beachMarker = new google.maps.Marker({
-      position: { lat: 38.385023, lng: -0.513040 },
-    map: map,
-    icon: image
+  var image = 'images/coso2.png';
+
+  $.ajax({
+      url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAxEerHUUvT/datasets/11/data',
+      type: 'GET',
+      dataType: "jsonp",
+      success: function (data) {
+          var edificios = data;
+          $(edificios).each(function (index, datos) {
+              var pos = datos.bbox.split(",");
+              var beachMarker = new google.maps.Marker({
+                  position: { lat: pos[0], lng: pos[1] },
+                  map: map,
+                  icon: image
+              });
+          })
+
+
+      },
+      error: function (jqXHR, textStatus, error) {
+          alert("error: " + jqXHR.responseText);
+      }
   });
 }
 
