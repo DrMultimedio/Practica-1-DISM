@@ -33,8 +33,31 @@ function initMap() {
       zoom: 16,
       center: { lat: 38.385023, lng: -0.513040 }
   });
-  window.scrollTo(0, 0);
 
+
+  $.ajax({
+      url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAxEerHUUvT/datasets/11/data',
+      type: 'GET',
+      dataType: "jsonp",
+      success: function (data) {
+          var edificios = data;
+          $(edificios).each(function (index, datos) {
+              var pos = datos.bbox.split(",");
+              //guardo en 0 lat y en 1 long
+              var wickedLocation = new google.maps.LatLng(pos[1], pos[0]);
+              var marker = new google.maps.Marker({
+                  map: map,
+                  position: wickedLocation
+              });
+
+          })
+
+
+      },
+      error: function (jqXHR, textStatus, error) {
+          alert("error: " + jqXHR.responseText);
+      }
+  });
 
 }
 
