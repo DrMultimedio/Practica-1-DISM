@@ -8,7 +8,9 @@
     <script src="../js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <link rel="shortcut icon" href="../favicon.ico">
+ 
 <script>
+
 function testAjax() {
 $.ajax({
     url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAxEerHUUvT/datasets/11/data',
@@ -63,7 +65,7 @@ alert( "error: " + jqXHR.responseText);
         </div><!-- /header -->
         <div role="main" class="ui-content">
             <h2>Two</h2>
-            <div id= "map"></div>
+            <div id= "map" style="width: 300px; height: 300px;"></div>
             <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
         </div><!-- /content -->
         <div data-role="footer">
@@ -85,9 +87,9 @@ alert( "error: " + jqXHR.responseText);
         </div><!-- /footer -->
     </div><!-- /page popup -->
 	<script>
-	function initMap() {
+        function initMap() {
 			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 16,
+				zoom: 1,
 				center: { lat: 38.385023, lng: -0.513040 }
 			});
 			window.scrollTo(0, 0);
