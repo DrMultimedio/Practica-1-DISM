@@ -48,8 +48,8 @@ alert( "error: " + jqXHR.responseText);
         </div><!-- /header -->
         <div role="main" class="ui-content">
 
-            <p><a href="#edificios" class="ui-btn ui-shadow ui-corner-all">Lista de edificios</a></p>
-            <p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Lista de edificios</a></p>
+            <p><a href="#mapasolopage" class="ui-btn ui-shadow ui-corner-all">Mapa</a></p>
+            <p><a href="#creditos" class="ui-btn ui-shadow ui-corner-all">Creditos</a></p>
             <p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Lista de edificios</a></p>
 
             <p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
@@ -58,20 +58,34 @@ alert( "error: " + jqXHR.responseText);
             <h4>By Jose :></h4>
         </div><!-- /footer -->
     </div><!-- /page one -->
-    <!-- Start of second page: #two -->
-    <div data-role="page" id="edificios" data-theme="a">
+    <!-- Pagina mapa #mapasolopage-->
+    <div data-role="page" id="mapasolopage" data-theme="a">
         <div data-role="header">
-            <h1>Two</h1>
+            <h1>Mapa</h1>
         </div><!-- /header -->
-        <div role="main" class="ui-content">
+        <div role="main" class="ui-content" id="mapasolo" style="height: 30em;">
             <h2>Two</h2>
-            <div id= "map" style="width: 300px; height: 300px;"></div>
-            <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
+            <div id= "map" style="width: 500px; height: 400px;">LA CARGA DEL MAPA HA FALLADO</div>
         </div><!-- /content -->
         <div data-role="footer">
-            <h4>Page Footer</h4>
+            <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
         </div><!-- /footer -->
     </div><!-- /page two -->
+	    <!-- pagina creditos #creditos -->
+	    <div data-role="page" id="creditos" data-theme="a">
+        <div data-role="header">
+            <h1>Créditos</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <h2>Jose Manuel Palau Alegría</h2>
+			Ingeniería multimedia, Universidad de Alicante
+			
+        </div><!-- /content -->
+        <div data-role="footer">
+            <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
+        </div><!-- /footer -->
+    </div><!-- /page two -->
+
     <!-- Start of third page: #popup -->
     <div data-role="page" id="popup">
         <div data-role="header" data-theme="b">
@@ -80,21 +94,21 @@ alert( "error: " + jqXHR.responseText);
         <div role="main" class="ui-content">
             <h2>Popup</h2>
             <p>I have an id of "popup" on my page container and only look like a dialog because the link to me had a <code>data-rel="dialog"</code> attribute which gives me this inset look and a <code>data-transition="pop"</code> attribute to change the transition to pop. Without this, I'd be styled as a normal page.</p>
-            <p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Back to page "one"</a></p>
+            <p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Volver</a></p>
         </div><!-- /content -->
         <div data-role="footer">
             <h4>Page Footer</h4>
         </div><!-- /footer -->
     </div><!-- /page popup -->
 	<script>
-        function initMap() {
-			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom: 1,
+        function initMapSimple() {
+			var map = new google.maps.Map(document.getElementById('mapasolo'), {
+				zoom: 16,
 				center: { lat: 38.385023, lng: -0.513040 }
 			});
 			window.scrollTo(0, 0);
 	}
 	</script>
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAm3HeeGNdlwrM9RnsLfKM5R18vP0BAaWg&signed_in=true&callback=initMap"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAm3HeeGNdlwrM9RnsLfKM5R18vP0BAaWg&signed_in=true&callback=initMapSimple"></script>
 </body>
 </html>
