@@ -8,47 +8,8 @@
     <script src="../js/jquery.js"></script>
     <script src="../js/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-
-    <script 
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm3HeeGNdlwrM9RnsLfKM5R18vP0BAaWg&signed_in=true&callback=initMap"></script>
-
-    <script>
-
-function testAjax() {
-$.ajax({
-    url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAxEerHUUvT/datasets/11/data',
-type: 'GET',
-dataType:"jsonp",
-success: function(data) {
-    //$('body').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
-    var edificios = data;
-    $(edificios).each(function (index, datos) {
-        var pos = datos.bbox.split(",");
-        $('body').append("<div><h5> Nombre:" + datos.nombre + "</h5>" + "<ul><li>Latitud:" + pos[0] + "</li><li>Longitud " + pos[1] + "</li><li>Plantas " + datos.plantas + "</ul><button onclick='initMap("+ pos[0] +","+ pos[1]+")'>Ver edificio</button></div>");
-
-})
-
-
-},
-error: function(jqXHR, textStatus, error) {
-alert( "error: " + jqXHR.responseText);
-}
-});
-
-
-}
-//funcion mapa
-
-function initMap() {
-
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: { lat: 38.385023, lng: -0.513040 }
-    });
-    window.scrollTo(0, 0);
-
-}
-    </script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm3HeeGNdlwrM9RnsLfKM5R18vP0BAaWg&signed_in=true"></script>
 
     <title>Aplicaçao</title>
 </head>
@@ -78,8 +39,20 @@ function initMap() {
         </div><!-- /header -->
         <div role="main" class="ui-content">
             <h2>Two</h2>
-            <script> initMap();</script>
-            <div id= "map"></div>
+
+    <script>
+
+	$(document).ready(function(){
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 16,
+			center: { lat: 38.385023, lng: -0.513040 }
+		});
+		window.scrollTo(0, 0);
+    });
+
+    </script>
+
+            <div id= "map" style="width: 500px; height: 400px;">well met</div>
             <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
         </div><!-- /content -->
         <div data-role="footer">
