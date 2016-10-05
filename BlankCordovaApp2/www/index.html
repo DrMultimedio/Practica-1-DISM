@@ -1,33 +1,255 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <script src="../js/jquery.js"></script>
+    <script src="../js/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm3HeeGNdlwrM9RnsLfKM5R18vP0BAaWg&signed_in=true"></script>
+    <script>
+
+        $(document).on("pagecreate","#mapaedificiospage",function(){
+            var map2 = new google.maps.Map(document.getElementById('map2'), {
+                zoom: 16,
+                center: { lat: 38.385023, lng: -0.513040 }
+            });
+
+
+            $.ajax({
+                url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAxEerHUUvT/datasets/11/data',
+                type: 'GET',
+                dataType: "jsonp",
+                success: function (data) {
+                    var edificios = data;
+                    $(edificios).each(function (index, datos) {
+                        var pos = datos.bbox.split(",");
+                        //guardo en 0 lat y en 1 long
+                        var wickedLocation = new google.maps.LatLng(pos[1], pos[0]);
+                        var marker = new google.maps.Marker({
+                            map: map2,
+                            position: wickedLocation
+                        });
+
+                    })
+
+
+                },
+                error: function (jqXHR, textStatus, error) {
+                    alert("error: " + jqXHR.responseText);
+                }
+            });
+
+        });
+
+        $(document).on("pagecreate", "#listapage", function () {
+
+            $.ajax({
+                url: 'https://dev.datos.ua.es/uapi/cbhRxH5tKsAxEerHUUvT/datasets/11/data',
+                type: 'GET',
+                dataType: "jsonp",
+                success: function (data) {
+                    //$('body').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+                    var edificios = data;
+                    $(edificios).each(function (index, datos) {
+                        var pos = datos.bbox.split(",");
+                        $('#tabla_edificios').append("<tr><td>"+datos.nombre +"</td>" + "<td>"+pos[0] +"</td>" + "<td>"+pos[1] +"</td>" + "<td>" + datos.plantas + "</td><td><button onclick='initMap2(" + pos[0] + "," + pos[1] + ")'>Ver edificio</button></td></tr>");
+
+                    })
+
+ 
+                },
+                error: function (jqXHR, textStatus, error) {
+                    alert("error: " + jqXHR.responseText);
+                }
+            });
+
+        });
+
+        function initMap2(lon, lat) {
+            window.location.href = "#popupmapa";
+            if (lon === undefined && lat === undefined) {
+                lon = -0.513040;
+                lat = 38.385023;
+            }
+            var wickedLocation = new google.maps.LatLng(lat, lon);
+            var map = new google.maps.Map(document.getElementById('mapEdSolo'), {
+                zoom: 16,
+                center: wickedLocation
+            });
+            var marker = new google.maps.Marker({
+                map: map,
+                position: wickedLocation
+            });
+
+            window.scrollTo(0, 0);
         }
 
-        #map {
-            height: 100%;
-        }
-    </style>
+
+
+    </script>
+    <title>Aplicaçao</title>
 </head>
 <body>
-    Mejor no revertimos cambios ^^
-    <br />
-    <button onclick="window.location.href='/creditos.html'">Créditos</button>
-    <br />
-    <button onclick="window.location.href='/mapa.html'">Mapa</button>
-    <br />
-    <button onclick="window.location.href='/edificiosua.html'">Mapa de edificios</button>
-    <br />
-    <button onclick="window.location.href='/edificios.html'">Edificios</button>
-    <script type="text/javascript" src="cordova.js"></script>
 
+    <!-- principio del landing -->
+    <div data-role="page" id="landing">
+        <div data-role="header">
+            <h1>Aplicasión tope chida</h1>
+        </div><!-- /header -->
+
+        <div role="main" class="ui-content">
+
+            <p><a href="#mapasolopage" class="ui-btn ui-shadow ui-corner-all">Mapa</a></p>
+            <p><a href="#mapaedificiospage" class="ui-btn ui-shadow ui-corner-all">Mapa con edificios</a></p>
+            <p><a href="#listapage" class="ui-btn ui-shadow ui-corner-all">Lista de edificios</a></p>
+            
+            <p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Créditos</a></p>
+        </div><!-- /content -->
+        <div data-role="footer" data-theme="a">
+            <h4>By Jose :></h4>
+        </div><!-- /footer -->
+    </div>
+    <!-- FIN DEL LANDING -->
+
+    <!-- INICIO DE MAPA -->
+    <div data-role="page" id="mapasolopage" data-theme="a">
+        <div data-role="header">
+            <h1>Mapa</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <h2>Mapa</h2>
+
+    <script>
+	$(document).ready(function(){
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 16,
+			center: { lat: 38.385023, lng: -0.513040 }
+		});
+		window.scrollTo(0, 0);
+		var onSuccess = function (position) {
+
+		    /*alert('Latitude: ' + position.coords.latitude + '\n' +
+                  'Longitude: ' + position.coords.longitude + '\n' +
+                  'Altitude: ' + position.coords.altitude + '\n' +
+                  'Accuracy: ' + position.coords.accuracy + '\n' +
+                  'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+                  'Heading: ' + position.coords.heading + '\n' +
+                  'Speed: ' + position.coords.speed + '\n' +
+                  'Timestamp: ' + position.timestamp + '\n');*/
+		    var wickedLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+		            var marker = new google.maps.Marker({
+		                map: map,
+		                position: wickedLocation
+		            });
+
+		};
+		function onError(error) {
+		    alert('code: ' + error.code + '\n' +
+                  'message: ' + error.message + '\n');
+		}
+
+		navigator.geolocation.getCurrentPosition(onSuccess, onError);
+ 
+	});
+
+    </script>
+
+            <div id= "map" style="width: 500px; height: 400px;">well met</div>
+            <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
+        </div><!-- /content -->
+        <div data-role="footer">
+            <h4>Page Footer</h4>
+        </div><!-- /footer -->
+    </div>
+    <!-- /FIN DE MAPA -->
+
+    <!-- INICIO DE MAPA CON EDIFICIOS-->
+    <div data-role="page" id="mapaedificiospage" data-theme="a">
+        <div data-role="header">
+            <h1>Mapa con edificios</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <div id="map2" style="width: 500px; height: 400px;">well met</div>
+            <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
+        </div><!-- /content -->
+        <div data-role="footer">
+            <h4>Piese de página</h4>
+        </div><!-- /footer -->
+    </div>
+    <!-- /FIN DE MAPA -->
+
+    <!-- INICIO DEL POPUP DE LOS CREDITOS -->
+    <div data-role="page" id="popup">
+        <div data-role="header" data-theme="b">
+            <h1>Dialog</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+            <h2>Popup</h2>
+            <p>Me llamo Jose Manuel, Palau Alegría los apellidos</p>
+            <p>DNI: 48727303D</p>
+
+            <img src="https://pbs.twimg.com/profile_images/686252862439997440/MhQQm4k0_400x400.png"/>
+            <p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Volver a inicio</a></p>
+        </div><!-- /content -->
+        <div data-role="footer">
+            <h4>Esto es un pie</h4>
+        </div><!-- /footer -->
+    </div>
+    <!-- FIN DEL POPUP DE LOS CREDITOS -->
+
+    <!-- INICIO DE LISTA DE EDIFICIOS-->
+    <div data-role="page" id="listapage" data-theme="a">
+        <div data-role="header">
+            <h1>Lista de edificios</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content">
+
+
+            <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
+        </div><!-- /content -->
+        <table data-role="table" class="ui-responsive">
+
+
+        </table>
+
+        <table data-role="table" class="ui-responsive">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Lat</th>
+                    <th>Lon</th>
+                    <th>Plantas</th>
+                    <th>boton</th>
+
+                </tr>
+            </thead>
+            <tbody id="tabla_edificios">
+
+            </tbody>
+        </table>
+
+
+        <div data-role="footer">
+            <h4>Hola, soy un piese</h4>
+        </div><!-- /footer -->
+</div>
+    <!-- /FIN DE LISTA DE EDIFICIOS -->
+    <!-- INICIO DEL POPUP DE LOS EDIFICIOS -->
+    <div data-role="page" id="popupmapa">
+        <div data-role="header" data-theme="b">
+            <h1>Edificio seleccionado</h1>
+        </div><!-- /header -->
+        <div role="main" class="ui-content" id="mapEdSolo" style="height: 60vh">
+        </div><!-- /content -->
+        <div data-role="footer">
+            <p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Volver a inicio</a></p>
+        </div><!-- /footer -->
+    </div>
+    <!-- FIN DEL POPUP DE LOS CREDITOS -->
 </body>
 </html>
-
