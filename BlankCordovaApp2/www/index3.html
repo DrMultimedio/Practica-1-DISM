@@ -43,48 +43,62 @@ alert( "error: " + jqXHR.responseText);
 
     <!-- Start of first page: #one -->
     <div data-role="page" id="landing">
+
         <div data-role="header">
             <h1>Aplicasión tope chida</h1>
         </div><!-- /header -->
-        <div role="main" class="ui-content">
 
+        <div role="main" class="ui-content">
             <p><a href="#mapasolopage" class="ui-btn ui-shadow ui-corner-all">Mapa</a></p>
             <p><a href="#creditos" class="ui-btn ui-shadow ui-corner-all">Creditos</a></p>
             <p><a href="#two" class="ui-btn ui-shadow ui-corner-all">Lista de edificios</a></p>
-
             <p><a href="#popup" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Show page "popup" (as a dialog)</a></p>
         </div><!-- /content -->
+
         <div data-role="footer" data-theme="a">
             <h4>By Jose :></h4>
         </div><!-- /footer -->
+
     </div><!-- /page one -->
+
+    <!-- Pagina mapa #mapasolopage-->
     <!-- Pagina mapa #mapasolopage-->
     <div data-role="page" id="mapasolopage" data-theme="a">
+
         <div data-role="header">
             <h1>Mapa</h1>
         </div><!-- /header -->
+
         <div role="main" class="ui-content" id="mapasolo" style="height: 30em;">
             <h2>Two</h2>
             <div id= "map" style="width: 500px; height: 400px;">LA CARGA DEL MAPA HA FALLADO</div>
         </div><!-- /content -->
+
         <div data-role="footer">
             <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
         </div><!-- /footer -->
-    </div><!-- /page two -->
+
+    </div>
+    <!-- /pagina mapa -->
+    <!-- /pagina mapa -->
 	    <!-- pagina creditos #creditos -->
 	    <div data-role="page" id="creditos" data-theme="a">
-        <div data-role="header">
-            <h1>Créditos</h1>
-        </div><!-- /header -->
+
+            <div data-role="header">
+                <h1>Créditos</h1>
+            </div><!-- /header -->
+
         <div role="main" class="ui-content">
             <h2>Jose Manuel Palau Alegría</h2>
 			Ingeniería multimedia, Universidad de Alicante
 			
         </div><!-- /content -->
+
         <div data-role="footer">
             <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
         </div><!-- /footer -->
-    </div><!-- /page two -->
+
+    </div><!-- /creditos -->
 
     <!-- Start of third page: #popup -->
     <div data-role="page" id="popup">
