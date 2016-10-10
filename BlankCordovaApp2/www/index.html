@@ -3,16 +3,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <link rel="stylesheet" href="../css/themes/default/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
     <link rel="shortcut icon" href="../favicon.ico">
-    <script src="../js/jquery.js"></script>
-    <script src="../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAm3HeeGNdlwrM9RnsLfKM5R18vP0BAaWg&signed_in=true"></script>
     <script>
-
-        $(document).on("pagecreate","#mapaedificiospage",function(){
+        $(document).on("pageshow","#mapaedificiospage",function(){
             var map2 = new google.maps.Map(document.getElementById('map2'), {
                 zoom: 16,
                 center: { lat: 38.385023, lng: -0.513040 }
@@ -70,6 +69,7 @@
         });
 
         function initMap2(lon, lat) {
+
             window.location.href = "#popupmapa";
             if (lon === undefined && lat === undefined) {
                 lon = -0.513040;
@@ -159,7 +159,7 @@
 
     </script>
 
-            <div id= "map" style="width: 500px; height: 400px;">well met</div>
+            <div id= "map" style="height: 400px;">well met</div>
             <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Back to page "one"</a></p>
         </div><!-- /content -->
         <div data-role="footer">
@@ -174,7 +174,7 @@
             <h1>Mapa con edificios</h1>
         </div><!-- /header -->
         <div role="main" class="ui-content">
-            <div id="map2" style="width: 500px; height: 400px;">well met</div>
+            <div id="map2" style="height: 400px;">well met</div>
             <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
         </div><!-- /content -->
         <div data-role="footer">
@@ -212,19 +212,15 @@
 
             <p><a href="#landing" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Volver</a></p>
         </div><!-- /content -->
-        <table data-role="table" class="ui-responsive">
 
-
-        </table>
-
-        <table data-role="table" class="ui-responsive">
+        <table data-role="table" class="ui-responsive" data-mode="columntoggle" data-column-btn-text="Columnas">
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Lat</th>
-                    <th>Lon</th>
-                    <th>Plantas</th>
-                    <th>boton</th>
+                    <th data-priority="3">Lat</th>
+                    <th data-priority="3">Lon</th>
+                    <th data-priority="3">Plantas</th>
+                    <th data-priority="2">boton</th>
 
                 </tr>
             </thead>
@@ -244,7 +240,7 @@
         <div data-role="header" data-theme="b">
             <h1>Edificio seleccionado</h1>
         </div><!-- /header -->
-        <div role="main" class="ui-content" id="mapEdSolo" style="height: 60vh">
+        <div role="main" class="ui-content" id="mapEdSolo" style="height: 400px">
         </div><!-- /content -->
         <div data-role="footer">
             <p><a href="#one" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">Volver a inicio</a></p>
